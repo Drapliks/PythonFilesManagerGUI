@@ -7,10 +7,12 @@ main.geometry("330x290")
 main.title("Python Files Manager")
 main.resizable(width=False, height=False)
 
+os.system('mkdir ~/PythonFiles')
+
 def openfilewin():
 
     def openfile():
-         os.system('exec kitty nvim ' + openfnamespace.get() + ".py")
+         os.system('exec kitty nvim ~/PythonFiles/' + openfnamespace.get() + ".py")
          openfilewindow.destroy()
     
 
@@ -32,10 +34,10 @@ def openfilewin():
     openfilewindow.mainloop()
 def newfilewin():
     def newfile():
-        os.system('touch ' + newfnamespace.get() + '.py')
+        os.system('touch ~/PythonFiles/' + newfnamespace.get() + '.py')
         
         def yespress():
-            os.system('exec kitty nvim ' + newfnamespace.get() + '.py')
+            os.system('exec kitty nvim ~/PythonFiles/' + newfnamespace.get() + '.py')
             newfilewindow.destroy()
             yornOpenNewFile.destroy()
         def nopress():
@@ -80,7 +82,7 @@ def delfilewin():
     def delfile():
         
         def yespress():
-            os.system('rm -rf ' + delfnamespace.get() + '.py')
+            os.system('rm -rf ~/PythonFiles/' + delfnamespace.get() + '.py')
             delfilewindow.destroy()
             areusurewin.destroy()
 
@@ -121,7 +123,7 @@ def delfilewin():
 def renamewin():
 
     def rename():
-        os.system('mv ' + oldfilenamespace.get() + '.py' + " " + newnamefilespace.get() + ".py")
+        os.system('mv ~/PythonFiles/' + oldfilenamespace.get() + '.py' + " ~/PythonFiles/" + newnamefilespace.get() + ".py")
         renamewindow.destroy()
 
     renamewindow = Tk()
