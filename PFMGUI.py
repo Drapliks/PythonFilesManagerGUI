@@ -151,6 +151,26 @@ def renamewin():
 def exitfromapp():
     sys.exit()
 
+def launchfilewin():
+
+    def launchfile():
+        os.system('exec kitty python ~/PythonFiles/' + laucnhfnamespace.get() + '.py')
+    launchfilewindow = Tk()
+    launchfilewindow.geometry("390x130")
+    launchfilewindow.resizable(width=False, height=False)
+    launchfilewindow.title("Laucnh file")
+
+    enterlfnametxt = Label(launchfilewindow, text="Enter file name:")
+    enterlfnametxt.pack(side="left")
+
+    laucnhfnamespace = Entry(launchfilewindow)
+    laucnhfnamespace.pack(side="left")
+
+    launchbutt = Button(launchfilewindow, text="Launch", command=launchfile)
+    launchbutt.pack(side="left")
+
+    launchfilewindow.mainloop()
+
 welcometxt = Label(text="Welcome!")
 welcometxt.pack()
 
@@ -159,6 +179,9 @@ openfilebutt.pack()
 
 newfilebutt = Button(main, text="New file", command=newfilewin)
 newfilebutt.pack()
+
+launchfilebutt = Button(main, text="Launch file", command=launchfilewin)
+launchfilebutt.pack()
 
 renamefilebutt = Button(main, text="Rename file", command=renamewin)
 renamefilebutt.pack()
