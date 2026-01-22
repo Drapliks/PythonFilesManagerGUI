@@ -36,31 +36,7 @@ def openfilewin():
 def newfilewin():
     def newfile():
         os.system('touch ~/PythonFiles/' + newfnamespace.get() + '.py')
-        
-        def yespress():
-            os.system('exec kitty nvim ~/PythonFiles/' + newfnamespace.get() + '.py')
-            newfilewindow.destroy()
-            yornOpenNewFile.destroy()
-        def nopress():
-            newfilewindow.destroy()
-            yornOpenNewFile.destroy()
-
-        yornOpenNewFile = Tk()
-        yornOpenNewFile.geometry("230x165")
-        yornOpenNewFile.resizable(width=False, height=False)
-        yornOpenNewFile.title("Need open file?")
-
-        quest = Label(yornOpenNewFile, text='Do you need open new file?')
-        quest.pack()
-
-        yesbutt = Button(yornOpenNewFile, text="Yes", command=yespress)
-        yesbutt.pack(side='left')
-
-        nobutt = Button(yornOpenNewFile, text='No', command=nopress)
-        nobutt.pack(side='right')
-
-
-        yornOpenNewFile.mainloop()
+        newfilewindow.destroy()
     
     newfilewindow = Tk()
     newfilewindow.geometry("390x130")
@@ -156,6 +132,7 @@ def launchfilewin():
 
     def launchfile():
         os.system('exec kitty python ~/PythonFiles/' + laucnhfnamespace.get() + '.py')
+    
     launchfilewindow = Tk()
     launchfilewindow.geometry("390x130")
     launchfilewindow.resizable(width=False, height=False)
@@ -179,56 +156,74 @@ def openprojectwin():
         def openmainpy():
             os.system('exec kitty nvim ~/PythonProjects/' + openpnamespace.get() + '/main.py')
             
-        def pipinstallwin():
-
-            def install():
-                os.system('pip install ' + installpkgnamespace.get())
-
-            pipinstallwindow = Tk()
-            pipinstallwindow.geometry("390x130")
-            pipinstallwindow.resizable(width=False, height=False)
-            pipinstallwindow.title("pip install")
-
-            enterpippkgametxt = Label(pipinstallwindow, text="Enter package name:")
-            enterpippkgametxt.pack(side="left")
-
-            installpkgnamespace = Entry(pipinstallwindow)
-            installpkgnamespace.pack(side="left")
-
-            installbutt = Button(pipinstallwindow, text="install", command=install)
-            installbutt.pack(side="left")
-
-            pipinstallwindow.mainloop()
-
         def exitprj():
             openprjwindow.destroy()
             prjwindow.destroy()
+        
+        def newfileinprj():
+
+            def newfileprj():
+                os.system('touch ~/PythonProjects/' + openpnamespace.get() + '/' + newfipnamespace.get() + '.py')
+                newfileinprjwindow.destroy()
+
+            newfileinprjwindow = Tk()
+            newfileinprjwindow.geometry("390x130")
+            newfileinprjwindow.resizable(width=False, height=False)
+            newfileinprjwindow.title("New file")
+
+            enternfipnametxt = Label(newfileinprjwindow, text="Enter file name:")
+            enternfipnametxt.pack(side="left")
+
+            newfipnamespace = Entry(newfileinprjwindow)
+            newfipnamespace.pack(side="left")
+
+            createbutt = Button(newfileinprjwindow, text="Create", command=newfileprj)
+            createbutt.pack(side="left")
+
+            newfileinprjwindow.mainloop()
+
+        def openfileinprj():
+
+            def openfileip():
+                os.system('exec kitty nvim ~/PythonProjects/' + openpnamespace.get() + '/' + openfipnamespace.get() + '.py')
+                openfileinprjwindow.destroy()
+
+            openfileinprjwindow = Tk()
+
+            openfileinprjwindow.geometry("390x130")
+            openfileinprjwindow.resizable(width=False, height=False)
+            openfileinprjwindow.title("Open file")
+
+            enterofipnametxt = Label(openfileinprjwindow, text="Enter file name:")
+            enterofipnametxt.pack(side="left")
+
+            openfipnamespace = Entry(openfileinprjwindow)
+            openfipnamespace.pack(side="left")
+
+            openfipbutt = Button(openfileinprjwindow, text="Open", command=openfileip)
+            openfipbutt.pack(side="left")
+
+            openfileinprjwindow.mainloop()
 
         prjwindow = Tk()
 
         prjwindow.geometry("410x315")
         prjwindow.resizable(width=False, height=False)
         prjwindow.title(openpnamespace.get())
-        os.system('source ~/PythonProjects/' + openpnamespace.get() + '/venv/bin/activate')
 
         openmpyButt = Button(prjwindow, text='Open main.py', command=openmainpy)
         openmpyButt.pack()
 
-        pipiButt = Button(prjwindow, text='pip install', command=pipinstallwin)
-        pipiButt.pack()
-
-        newfButt = Button(prjwindow, text='New file')
+        newfButt = Button(prjwindow, text='New file', command=newfileinprj)
         newfButt.pack() 
 
-        openfButt = Button(prjwindow, text='Open file')
+        openfButt = Button(prjwindow, text='Open file', command=openfileinprj)
         openfButt.pack() 
 
         exitButt = Button(prjwindow, text='Exit', command=exitprj)
         exitButt.pack(side='bottom')
 
         prjwindow.mainloop()
-
-
 
     openprjwindow = Tk()
     openprjwindow.geometry("390x130")
@@ -250,36 +245,13 @@ def newprojectwin():
     def newprj():
         os.system('mkdir ~/PythonProjects/' + newpnamespace.get())
         os.system('touch ~/PythonProjects/' + newpnamespace.get() + '/main.py')
-        os.system('mkdir ~/PythonProjects/' + newpnamespace.get() + '/venv/')
         os.system('python -m venv ~/PythonProjects/' + newpnamespace.get() + '/venv/')
-        needopenprj = Tk()
+        newprjwindow.destroy()
         
-        def yespress():
-            pass
-        def nopress():
-            newprjwindow.destroy()
-            newprjwindow.destroy()
-
-        needopenprj = Tk()
-        needopenprj.geometry("230x165")
-        needopenprj.resizable(width=False, height=False)
-        needopenprj.title("Need open file?")
-
-        quest = Label(needopenprj, text='Do you need open new file?')
-        quest.pack()
-
-        yesbutt = Button(needopenprj, text="Yes", command=yespress)
-        yesbutt.pack(side='left')
-
-        nobutt = Button(needopenprj, text='No', command=nopress)
-        nobutt.pack(side='right')
-
-        needopenprj.mainloop
-
     newprjwindow = Tk()
     newprjwindow.geometry("390x130")
     newprjwindow.resizable(width=False, height=False)
-    newprjwindow.title("Open project")
+    newprjwindow.title("New project")
 
     enternpnametxt = Label(newprjwindow, text="Enter project name:")
     enternpnametxt.pack(side="left")
